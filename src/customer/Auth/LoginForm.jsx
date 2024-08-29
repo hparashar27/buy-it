@@ -10,8 +10,6 @@ const LoginForm = () => {
   
   const dispatch = useDispatch();
   const AuthReducer = useSelector(store=>store);
-  console.log(AuthReducer,"auth reducer state");
-
   useEffect(()=>{
     if(jwt){
       dispatch(getUser())

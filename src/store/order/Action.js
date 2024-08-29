@@ -70,7 +70,7 @@ export const getOrderById = (orderId) => async (dispatch) => {
   dispatch(get_order_by_id_request());
   try {
     const response  = await api.get(`/api/orders/${orderId}`);
-    console.log("getOrderById====================",response.data);
+    // console.log("getOrderById====================",response.data);
     dispatch(get_order_by_id_success(response.data));
   } catch (error) {
     dispatch(get_order_by_id_failure(error.message));

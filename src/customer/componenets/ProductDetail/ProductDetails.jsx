@@ -11,54 +11,55 @@ import { useDispatch, useSelector } from 'react-redux'
 import { findProducts, findProductsById } from '../../../store/product/Action'
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import { addItemToCart, createCartForUser, getItemToCart } from '../../../store/cart/Action'
-const product = {
-  name: 'Basic Tee 6-Pack',
-  price: '$192',
-  href: '#',
-  breadcrumbs: [
-    { id: 1, name: 'Men', href: '#' },
-    { id: 2, name: 'Clothing', href: '#' },
-  ],
-  images: [
-    {
-      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg',
-      alt: 'Two each of gray, white, and black shirts laying flat.',
-    },
-    {
-      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg',
-      alt: 'Model wearing plain black basic tee.',
-    },
-    {
-      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg',
-      alt: 'Model wearing plain gray basic tee.',
-    },
-    {
-      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg',
-      alt: 'Model wearing plain white basic tee.',
-    },
-  ],
-  colors: [
-    { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
-    { name: 'Gray', class: 'bg-gray-200', selectedClass: 'ring-gray-400' },
-    { name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-900' },
-  ],
-  sizes: [
-    { name: 'S', inStock: true },
-    { name: 'M', inStock: true },
-    { name: 'L', inStock: true },
-    { name: 'XL', inStock: true },
-  ],
-  description:
-    'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
-  highlights: [
-    'Hand cut and sewn locally',
-    'Dyed with our proprietary colors',
-    'Pre-washed & pre-shrunk',
-    'Ultra-soft 100% cotton',
-  ],
-  details:
-    'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
-}
+
+// const product = {
+//   name: 'Basic Tee 6-Pack',
+//   price: '$192',
+//   href: '#',
+//   breadcrumbs: [
+//     { id: 1, name: ``, href: '#' },
+//     { id: 2, name: 'Clothing', href: '#' },
+//   ],
+//   images: [
+//     {
+//       src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg',
+//       alt: 'Two each of gray, white, and black shirts laying flat.',
+//     },
+//     {
+//       src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg',
+//       alt: 'Model wearing plain black basic tee.',
+//     },
+//     {
+//       src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg',
+//       alt: 'Model wearing plain gray basic tee.',
+//     },
+//     {
+//       src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg',
+//       alt: 'Model wearing plain white basic tee.',
+//     },
+//   ],
+//   colors: [
+//     { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
+//     { name: 'Gray', class: 'bg-gray-200', selectedClass: 'ring-gray-400' },
+//     { name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-900' },
+//   ],
+//   sizes: [
+//     { name: 'S', inStock: true },
+//     { name: 'M', inStock: true },
+//     { name: 'L', inStock: true },
+//     { name: 'XL', inStock: true },
+//   ],
+//   description:
+//     'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
+//   highlights: [
+//     'Hand cut and sewn locally',
+//     'Dyed with our proprietary colors',
+//     'Pre-washed & pre-shrunk',
+//     'Ultra-soft 100% cotton',
+//   ],
+//   details:
+//     'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
+// }
 const reviews = { href: '#', average: 4, totalCount: 117 }
 
 function classNames(...classes) {
@@ -66,18 +67,71 @@ function classNames(...classes) {
 }
 
 const ProductDetails = () => {
+
   const params = useParams();
   const navigate = useNavigate();
-  const productData = useSelector(state => state.CustomerProductReducer);
+  const productData = useSelector(state => state?.CustomerProductReducer);
+
+  const product = {
+    name: `${productData?.product?.category?.name}`,
+    price: '$192',
+    href: '#',
+    breadcrumbs: [
+      { id: 1, name: `${productData?.product?.category?.parentCategory?.parentCategory?.name}`, href: '#' },
+      { id: 2, name: `${productData?.product?.category?.parentCategory?.name}`, href: '#' },
+    ],
+    images: [
+      {
+        src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg',
+        alt: 'Two each of gray, white, and black shirts laying flat.',
+      },
+      {
+        src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg',
+        alt: 'Model wearing plain black basic tee.',
+      },
+      {
+        src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg',
+        alt: 'Model wearing plain gray basic tee.',
+      },
+      {
+        src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg',
+        alt: 'Model wearing plain white basic tee.',
+      },
+    ],
+    colors: [
+      { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
+      { name: 'Gray', class: 'bg-gray-200', selectedClass: 'ring-gray-400' },
+      { name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-900' },
+    ],
+    sizes: [
+      { name: 'S', inStock: true },
+      { name: 'M', inStock: true },
+      { name: 'L', inStock: true },
+      { name: 'XL', inStock: true },
+    ],
+    description:
+      'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
+    highlights: [
+      'Hand cut and sewn locally',
+      'Dyed with our proprietary colors',
+      'Pre-washed & pre-shrunk',
+      'Ultra-soft 100% cotton',
+    ],
+    details:
+      'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
+  }
+
+  
   const dispatch = useDispatch();
   useEffect(()=>{
  dispatch(findProductsById(params.productId))
   },[params.productId])
  
 
-  // console.log(productData.product?.imageUrl, "product data");
+  console.log(productData?.product?.category?.parentCategory?.parentCategory?.name, "product---------------------- data");
   const [selectedColor, setSelectedColor] = useState(product.colors[0])
   const [selectedSize, setSelectedSize] = useState(product.sizes[2])
+
   const allreducer = useSelector(store=>store);
   const handleAddToCartItem = () =>{
     const reqData = {productId:params.productId,size:selectedSize.name};
@@ -88,6 +142,10 @@ const ProductDetails = () => {
     //   })
     return navigate("/cart")
   } 
+  
+  const filteredProducts = productData?.allProducts?.content?.filter(product =>
+    product?.category?.name === productData?.product?.category?.name
+  );
 
   return (
     <div className="bg-white">
@@ -98,7 +156,7 @@ const ProductDetails = () => {
               <li key={breadcrumb.id}>
                 <div className="flex items-center">
                   <a href={breadcrumb.href} className="mr-2 text-sm font-medium text-gray-900">
-                    {breadcrumb.name}
+                  {breadcrumb.name}
                   </a>
                   <svg
                     width={16}
@@ -124,13 +182,13 @@ const ProductDetails = () => {
 
         {/* Image gallery */}
         <div className="flex flex-col items-center">
-          <div className="overflow-hidden rounded-lg max-w-[30rem] max-h-[35rem]">
-            <img
-              src={productData.product?.imageUrl}
-              alt={productData.product?.title}
-              className="h-full w-full object-cover object-center"
-            />
-          </div>
+        <div className="overflow-hidden rounded-lg max-w-[30rem] max-h-[35rem]">
+  <img
+    src={productData.product?.imageUrl}
+    alt={productData.product?.title}
+    className="h-[95%] w-full object-cover object-center"
+  />
+</div>
           <div className="flex flex-wrap space-x-5 justify-center">
           {product.images.map((image)=><div className="aspect-h-5 aspect-w-4 overflow-hidden rounded max-w-[5rem] max-h-[5rem]">
             <img
@@ -153,8 +211,8 @@ const ProductDetails = () => {
           <div className="mt-4 lg:row-span-3 lg:mt-0">
             <h2 className="sr-only">Product information</h2>
             <div className='flex space-x-5 items-center text-lg lg:text-xl text-gray-600 mt-6'>
-             <p className='font-semibold'>{<CurrencyRupeeIcon/>}{productData.product?.price}</p>
-           <p className='opacity-50 line-through'>{<CurrencyRupeeIcon/>}{productData.product?.discountedPrice}</p>
+             <p className='font-semibold'> ₹ {productData.product?.discountedPrice}</p>
+           <p className='opacity-50 line-through'> ₹ {productData.product?.price} </p>
             <p className='font-semibold text-green-600'>{productData.product?.discountedPercent}% off</p> 
             </div>
             {/* Reviews */}
@@ -309,9 +367,16 @@ const ProductDetails = () => {
           </div>
         </div>
         </section>
+                {/* similar products */}
+                <section className='pt-10'>
+          <h1 className='py-10 text-lg text-center font-semibold'>Similar products</h1>
+           <div className='flex flex-wrap space-y-5'>
+            { filteredProducts && filteredProducts.map((item)=><HomeSectionCard product ={item}/>)}
+           </div>
+        </section>
         {/* rating and reviews */}
         <section>
-          <h1 className='font-semibold text-lg pb-4'>Recent rating and reviews </h1>
+          <h1 className='py-10 text-lg text-center font-semibold'>Recent rating and reviews </h1>
           <div className='border p-5'>
           <Grid container spacing={7}>
             <Grid item xs={7}>
@@ -339,13 +404,7 @@ const ProductDetails = () => {
           </Grid>
           </div>
         </section>
-        {/* similar products */}
-        <section className='pt-10'>
-          <h1 className='py-10 text'>Similar products</h1>
-           <div className='flex flex-wrap space-y-5'>
-            {mens_kurta.map((item)=><HomeSectionCard product ={item}/>)}
-           </div>
-        </section>
+
       </div>
     </div>
   )

@@ -50,7 +50,7 @@ export const register = (userData) => async (dispatch) => {
     if (user.jwt) {
       localStorage.setItem("jwt", user.jwt);
     }
-    console.log('user :',user);
+    // console.log('user :',user);
     dispatch(register_success(user.jwt));
   } catch (error) {
     dispatch(register_failure(error.message));
@@ -83,10 +83,10 @@ export const login_request = () => {
 export const login = (userData) => async(dispatch) => {
   dispatch(login_request());
   try {
-    console.log(userData)
+    // console.log(userData)
     const request = await axios.post(`${API_BASE_URL}/auth/signin`, userData);
     const user = request.data;
-    console.log('user :',user);
+    // console.log('user :',user);
     if (user.jwt) {
       localStorage.setItem("jwt", user.jwt);
     }
@@ -127,7 +127,7 @@ export const getUser = (jwt) => async(dispatch) => {
         }
     });
     const user = response.data;
-    console.log('user :',user);
+    // console.log('user :',user);
     dispatch(get_user_success(user));
   } catch (error) {
     dispatch(get_user_failure(error.message));

@@ -1,7 +1,7 @@
 import React from 'react'
 
 const AddressCard = ({address}) => {
-  console.log(address)
+  // console.log(address)
   return (
     <div className='space-y-3'>
       <p className='font-semibold'>{address?.firstName}  {address?.lastName}</p>

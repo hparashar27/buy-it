@@ -1,4 +1,5 @@
 import { api } from "../../config/apiConfig";
+import { GET_USER_SUCCESS } from "../auth/ActionType";
 import {
   FIND_PRODUCT_BY_ID_FAILURE,
   FIND_PRODUCT_BY_ID_REQUEST,
@@ -6,6 +7,9 @@ import {
   FIND_PRODUCT_FAILURE,
   FIND_PRODUCT_REQUEST,
   FIND_PRODUCT_SUCCESS,
+  GET_PRODUCTS_FAILURE,
+  GET_PRODUCTS_REQUEST,
+  GET_PRODUCTS_SUCCESS,
 } from "./ActionType";
 
 export const find_product_by_id_request = () => {
@@ -33,7 +37,7 @@ export const findProductsById = (productId) => async (dispatch) => {
   try {
     const { data } = await api.get(`/api/admin/products/${productId}`);
     dispatch(find_product_by_id_success(data));
-    console.log("findProductById ----------------- :", data);
+    // console.log("findProductById ----------------- :", data);
   } catch (error) {
     dispatch(find_product_by_id_failure(error.message));
   }
@@ -65,7 +69,7 @@ export const findProducts = (reqData) => async (dispatch) => {
     description,
     category,
     color,
-    sizes,
+    size,
     minPrice,
     maxPrice,
     discountedPercent,
@@ -76,18 +80,48 @@ export const findProducts = (reqData) => async (dispatch) => {
   } = reqData;
   dispatch(find_product_request());
   try {
-    const { data } = await api.get(
-      `/api/products`
-      // 
-    );
-    console.log("findProducts :",data);
-    console.log("findProducts :",data);
-    console.log("findProducts :",data);
-    console.log("findProducts :",data);
-    console.log("findProducts :",data);
+    // console.log(discountedPercent,"---------------------------discount--------------value")
+    const { data } = await api.get(`/api/products?color=${color}&discountedPercent=${discountedPercent}&minPrice=${minPrice}&maxPrice=${maxPrice}`)
+    
+    // console.log("findProducts :",data);
+    // console.log("findProducts :",data);
+    // console.log("findProducts :",data);
+    // console.log("findProducts :",data);
+    // console.log("findProducts :",data);
     dispatch(find_product_success(data));
   } catch (error) {
     dispatch(find_product_failure(error.message));
   }
 };
-// export const
+
+const get_product_request = () =>{
+return {
+  type:GET_PRODUCTS_REQUEST,
+}
+}
+
+const get_product_success = (products) =>{
+  return {
+    type:GET_PRODUCTS_SUCCESS,
+    payload:products
+  }
+}
+
+const get_product_failure = (error) => {
+  return{
+    type:GET_PRODUCTS_FAILURE,
+    payload:error
+  }
+}
+
+export const getProducts = () => async(dispatch) =>{
+   dispatch(get_product_request());
+  try{
+const {data} = await api.get("/api/products/products");
+const products = data;
+  dispatch(get_product_success(products));
+  // console.log("All Products ----------------- :",products);
+  }catch(error){
+dispatch(get_product_failure(error.message));
+  }
+}

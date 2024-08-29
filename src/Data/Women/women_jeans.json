@@ -6,8 +6,8 @@
         "color": "gray",
         "discountedPrice": 474,
         "price": 1399,
-        "discountPersent": 66 ,
-        "size": [
+        "discountedPercent": 66 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -34,8 +34,8 @@
         "color": "gray",
         "discountedPrice": 899,
         "price": 1699,
-        "discountPersent": 47 ,
-        "size": [
+        "discountedPercent": 47 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -62,8 +62,8 @@
         "color": "gray",
         "discountedPrice": 499,
         "price": 1499,
-        "discountPersent": 66 ,
-        "size": [
+        "discountedPercent": 66 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -90,8 +90,8 @@
         "color": "gray",
         "discountedPrice": 629,
         "price": 1999,
-        "discountPersent": 68 ,
-        "size": [
+        "discountedPercent": 68 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -118,8 +118,8 @@
         "color": "gray",
         "discountedPrice": 499,
         "price": 1499,
-        "discountPersent": 66 ,
-        "size": [
+        "discountedPercent": 66 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -146,8 +146,8 @@
         "color": "gray",
         "discountedPrice": 577,
         "price": 1899,
-        "discountPersent": 69 ,
-        "size": [
+        "discountedPercent": 69 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -174,8 +174,8 @@
         "color": "gray",
         "discountedPrice": 479,
         "price": 1299,
-        "discountPersent": 63 ,
-        "size": [
+        "discountedPercent": 63 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -202,8 +202,8 @@
         "color": "gray",
         "discountedPrice": 719,
         "price": 1499,
-        "discountPersent": 52 ,
-        "size": [
+        "discountedPercent": 52 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -230,8 +230,8 @@
         "color": "gray",
         "discountedPrice": 629,
         "price": 2999,
-        "discountPersent": 79 ,
-        "size": [
+        "discountedPercent": 79 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -258,8 +258,8 @@
         "color": "gray",
         "discountedPrice": 1399,
         "price": 2699,
-        "discountPersent": 50 ,
-        "size": [
+        "discountedPercent": 50 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -286,8 +286,8 @@
         "color": "gray",
         "discountedPrice": 494,
         "price": 2299,
-        "discountPersent": 78 ,
-        "size": [
+        "discountedPercent": 78 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -314,8 +314,8 @@
         "color": "gray",
         "discountedPrice": 849,
         "price": 1499,
-        "discountPersent": 43 ,
-        "size": [
+        "discountedPercent": 43 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -342,8 +342,8 @@
         "color": "gray",
         "discountedPrice": 499,
         "price": 1499,
-        "discountPersent": 66 ,
-        "size": [
+        "discountedPercent": 66 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -370,8 +370,8 @@
         "color": "gray",
         "discountedPrice": 840,
         "price": 2199,
-        "discountPersent": 61 ,
-        "size": [
+        "discountedPercent": 61 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -398,8 +398,8 @@
         "color": "gray",
         "discountedPrice": 659,
         "price": 1999,
-        "discountPersent": 67 ,
-        "size": [
+        "discountedPercent": 67 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -426,8 +426,8 @@
         "color": "gray",
         "discountedPrice": 629,
         "price": 1999,
-        "discountPersent": 68 ,
-        "size": [
+        "discountedPercent": 68 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -454,8 +454,8 @@
         "color": "gray",
         "discountedPrice": 499,
         "price": 999,
-                "discountPersent": 50 ,
-        "size": [
+                "discountedPercent": 50 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -482,8 +482,8 @@
         "color": "gray",
         "discountedPrice": 499,
         "price": 1499,
-        "discountPersent": 66 ,
-        "size": [
+        "discountedPercent": 66 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -510,8 +510,8 @@
         "color": "gray",
         "discountedPrice": 550,
         "price": 2099,
-        "discountPersent": 73 ,
-        "size": [
+        "discountedPercent": 73 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -538,8 +538,8 @@
         "color": "gray",
         "discountedPrice": 1399,
         "price": 2699,
-        "discountPersent": 50 ,
-        "size": [
+        "discountedPercent": 50 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -566,8 +566,8 @@
         "color": "gray",
         "discountedPrice": 577,
         "price": 1899,
-        "discountPersent": 69 ,
-        "size": [
+        "discountedPercent": 69 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -594,8 +594,8 @@
         "color": "gray",
         "discountedPrice": 629,
         "price": 3999,
-        "discountPersent": 84 ,
-        "size": [
+        "discountedPercent": 84 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -621,8 +621,8 @@
         "title": "Women Regular High Rise Grey Jeans",
         "color": "gray",
         "discountedPrice": 499,
-        "price": 999,        "discountPersent": 50 ,
-        "size": [
+        "price": 999,        "discountedPercent": 50 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -649,8 +649,8 @@
         "color": "gray",
         "discountedPrice": 672,
         "price": 2199,
-        "discountPersent": 69 ,
-        "size": [
+        "discountedPercent": 69 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -677,8 +677,8 @@
         "color": "gray",
         "discountedPrice": 629,
         "price": 1999,
-        "discountPersent": 68 ,
-        "size": [
+        "discountedPercent": 68 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -705,8 +705,8 @@
         "color": "gray",
         "discountedPrice": 629,
         "price": 1999,
-        "discountPersent": 68 ,
-        "size": [
+        "discountedPercent": 68 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -733,8 +733,8 @@
         "color": "gray",
         "discountedPrice": 840,
         "price": 2199,
-        "discountPersent": 61 ,
-        "size": [
+        "discountedPercent": 61 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -761,8 +761,8 @@
         "color": "gray",
         "discountedPrice": 399,
         "price": 2000,
-        "discountPersent": 80 ,
-        "size": [
+        "discountedPercent": 80 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -789,8 +789,8 @@
         "color": "gray",
         "discountedPrice": 577,
         "price": 1899,
-        "discountPersent": 69 ,
-        "size": [
+        "discountedPercent": 69 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -817,8 +817,8 @@
         "color": "gray",
         "discountedPrice": 498,
         "price": 2499,
-        "discountPersent": 80 ,
-        "size": [
+        "discountedPercent": 80 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -845,8 +845,8 @@
         "color": "gray",
         "discountedPrice": 499,
         "price": 1499,
-        "discountPersent": 66 ,
-        "size": [
+        "discountedPercent": 66 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -873,8 +873,8 @@
         "color": "gray",
         "discountedPrice": 1249,
         "price": 2699,
-        "discountPersent": 55 ,
-        "size": [
+        "discountedPercent": 55 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -901,8 +901,8 @@
         "color": "gray",
         "discountedPrice": 607,
         "price": 1999,
-        "discountPersent": 69 ,
-        "size": [
+        "discountedPercent": 69 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -929,8 +929,8 @@
         "color": "gray",
         "discountedPrice": 577,
         "price": 1899,
-        "discountPersent": 69 ,
-        "size": [
+        "discountedPercent": 69 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -957,8 +957,8 @@
         "color": "gray",
         "discountedPrice": 449,
         "price": 1799,
-        "discountPersent": 75 ,
-        "size": [
+        "discountedPercent": 75 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -985,8 +985,8 @@
         "color": "gray",
         "discountedPrice": 629,
         "price": 3999,
-        "discountPersent": 84 ,
-        "size": [
+        "discountedPercent": 84 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -1013,8 +1013,8 @@
         "color": "gray",
         "discountedPrice": 479,
         "price": 1599,
-        "discountPersent": 70 ,
-        "size": [
+        "discountedPercent": 70 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -1041,8 +1041,8 @@
         "color": "gray",
         "discountedPrice": 577,
         "price": 1899,
-        "discountPersent": 69 ,
-        "size": [
+        "discountedPercent": 69 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -1069,8 +1069,8 @@
         "color": "gray",
         "discountedPrice": 686,
         "price": 2599,
-        "discountPersent": 73 ,
-        "size": [
+        "discountedPercent": 73 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20
@@ -1097,8 +1097,8 @@
         "color": "gray",
         "discountedPrice": 489,
         "price": 1799,
-        "discountPersent": 72 ,
-        "size": [
+        "discountedPercent": 72 ,
+        "sizes": [
             {
               "name": "S",
               "quantity": 20

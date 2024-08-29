@@ -15,6 +15,7 @@ import { deepPurple } from "@mui/material/colors";
 import { getUser ,logout} from "../../../store/auth/Action";
 // import { getCart } from "../../../Redux/Customers/Cart/Action";
 import TextField from "@mui/material/TextField";
+import { findProducts, getProducts } from "../../../store/product/Action";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -49,13 +50,13 @@ const navigation = {
           name: "Clothing",
           items: [
             { name: "Tops", id: "top", href: `{women/clothing/tops}` },
-            { name: "Dresses", id: "women_dress", href: "#" },
+            { name: "Dresses", id: "Dress", href: "#" },
+            { name: "Gouns", id: "Gouns" },
             { name: "Women Jeans", id: "women_jeans" },
             { name: "Lengha Choli", id: "lengha_choli" },
             { name: "Sweaters", id: "sweater" },
             { name: "T-Shirts", id: "t-shirt" },
             { name: "Jackets", id: "jacket" },
-            { name: "Gouns", id: "gouns" },
             { name: "Sarees", id: "saree" },
             { name: "Kurtas", id: "kurtas" },
           ],
@@ -161,15 +162,22 @@ export default function Navigation() {
   const jwt = localStorage.getItem("jwt");
   const location = useLocation();
   
+
   useEffect(() => {
+    let data = {
+      color: "" ,
+      discountedPercent:"",
+      minPrice:"",
+      maxPrice:""
+    }
     if (jwt) {
       dispatch(getUser(jwt));
-  //     dispatch(getCart(jwt));
+      dispatch(findProducts(data));
     }
-  }, [jwt]);
+  },[jwt]);
 
   const auth = useSelector((store) => store);
-// console.log(auth.AuthReducer.user,"auth nav")
+  //  console.log(auth,"auth nav")
 
   const handleUserClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -187,10 +195,10 @@ export default function Navigation() {
     setOpenAuthModal(false);
   };
 
-  // const handleCategoryClick = (category, section, item, close) => {
-  //   navigate(`/${category.id}/${section.id}/${item.id}`);
-  //   close();
-  // };
+  const handleCategoryClick = (category, section, item, close) => {
+    navigate(`/${category?.id}/${section?.id}/${item?.id}`);
+    close();
+  };
 
   useEffect(() => {
     if (auth.AuthReducer.user) {
@@ -253,88 +261,94 @@ export default function Navigation() {
 
                 {/* Links */}
                 <Tab.Group as="div" className="mt-2">
-                  <div className="border-b border-gray-200">
-                    <Tab.List className="-mb-px flex space-x-8 px-4">
-                      {navigation.categories.map((category) => (
-                        <Tab
-                          key={category.name}
-                          className={({ selected }) =>
-                            classNames(
-                              selected
-                                ? "border-indigo-600 text-indigo-600"
-                                : "border-transparent text-gray-900",
-                              "flex-1 whitespace-nowrap border-b-2 px-1 py-4 text-base font-medium border-none"
-                            )
-                          }
-                        >
-                          {category.name}
-                        </Tab>
-                      ))}
-                    </Tab.List>
-                  </div>
-                  <Tab.Panels as={Fragment}>
-                    {navigation.categories.map((category) => (
-                      <Tab.Panel
-                        key={category.name}
-                        className="space-y-10 px-4 pb-8 pt-10"
-                      >
-                        <div className="grid grid-cols-2 gap-x-4">
-                          {category.featured.map((item) => (
-                            <div
-                              key={item.name}
-                              className="group relative text-sm"
-                            >
-                              <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
-                                <img
-                                  src={item.imageSrc}
-                                  alt={item.imageAlt}
-                                  className="object-cover object-center"
-                                />
-                              </div>
-                              <a
-                                href={item.href}
-                                className="mt-6 block font-medium text-gray-900"
-                              >
-                                <span
-                                  className="absolute inset-0 z-10"
-                                  aria-hidden="true"
-                                />
-                                {item.name}
-                              </a>
-                              <p aria-hidden="true" className="mt-1">
-                                Shop now
-                              </p>
-                            </div>
-                          ))}
-                        </div>
-                        {category.sections.map((section) => (
-                          <div key={section.name}>
-                            <p
-                              id={`${category.id}-${section.id}-heading-mobile`}
-                              className="font-medium text-gray-900"
-                            >
-                              {section.name}
-                            </p>
-                            {/* eslint-disable-next-line jsx-a11y/no-redundant-roles */}
-                            <ul
-                              role="list"
-                              aria-labelledby={`${category.id}-${section.id}-heading-mobile`}
-                              className="mt-6 flex flex-col space-y-6"
-                            >
-                              {section.items.map((item) => (
-                                <li key={item.name} className="flow-root">
-                                  <p className="-m-2 block p-2 text-gray-500">
-                                    {"item.name"}
-                                  </p>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))}
-                      </Tab.Panel>
-                    ))}
-                  </Tab.Panels>
-                </Tab.Group>
+  <div className="border-b border-gray-200">
+    <Tab.List className="-mb-px flex space-x-8 px-4">
+      {navigation.categories.map((category, index) => (
+        <Tab
+          key={category.name}
+          className={({ selected }) =>
+            classNames(
+              selected
+                ? "border-indigo-600 text-indigo-600"
+                : "border-transparent text-gray-900",
+              "flex-1 whitespace-nowrap border-b-2 px-1 py-4 text-base font-medium border-none"
+            )
+          }
+          onClick={() => setOpen(true)} // Open the panel when a tab is clicked
+        >
+          {category.name}
+        </Tab>
+      ))}
+    </Tab.List>
+  </div>
+  <Tab.Panels as={Fragment}>
+    {navigation.categories.map((category) => (
+      <Tab.Panel
+        key={category.name}
+        className="space-y-10 px-4 pb-8 pt-10"
+      >
+        <div className="grid grid-cols-2 gap-x-4">
+          {category.featured.map((item) => (
+            <div
+              key={item.name}
+              className="group relative text-sm"
+            >
+              <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
+                <img
+                  src={item.imageSrc}
+                  alt={item.imageAlt}
+                  className="object-cover object-center"
+                />
+              </div>
+              <a
+                href={item.href}
+                className="mt-6 block font-medium text-gray-900"
+              >
+                <span
+                  className="absolute inset-0 z-10"
+                  aria-hidden="true"
+                />
+                {item.name}
+              </a>
+              <p aria-hidden="true" className="mt-1">
+                Shop now
+              </p>
+            </div>
+          ))}
+        </div>
+        {category.sections.map((section) => (
+          <div key={section.name}>
+            <p
+              id={`${category.id}-${section.id}-heading-mobile`}
+              className="font-medium text-gray-900"
+            >
+              {section.name}
+            </p>
+            <ul
+              role="list"
+              aria-labelledby={`${category.id}-${section.id}-heading-mobile`}
+              className="mt-6 flex flex-col space-y-6"
+            >
+              {section.items.map((item) => (
+                <li key={item.name} className="flow-root">
+                  <p 
+                  onClick={() => {
+                    handleCategoryClick(category, section, item, handleClose);
+                    handleClose(); // Close the panel
+                  }}
+                  className="-m-2 block p-2 text-gray-500">
+                    {item.name}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </Tab.Panel>
+    ))}
+  </Tab.Panels>
+</Tab.Group>
+
 
                 <div className="space-y-6 border-t border-gray-200 px-4 py-6">
                   {navigation.pages.map((page) => (
@@ -500,14 +514,14 @@ export default function Navigation() {
                                                 className="flex"
                                               >
                                                 <p
-                                                  // onClick={() =>
-                                                  //   handleCategoryClick(
-                                                  //     category,
-                                                  //     section,
-                                                  //     item,
-                                                  //     close
-                                                  //   )
-                                                  // }
+                                                  onClick={() =>
+                                                    handleCategoryClick(
+                                                      category,
+                                                      section,
+                                                      item,
+                                                      close
+                                                    )
+                                                  }
                                                   className="cursor-pointer hover:text-gray-800"
                                                 >
                                                   {item.name}
@@ -541,8 +555,8 @@ export default function Navigation() {
               </Popover.Group>
 
               <div className="ml-auto flex items-center">
-                <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                  {auth.AuthReducer.user ? (
+                <div className=" lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
+                  {auth?.AuthReducer?.user ? (
                     <div>
                       <Avatar
                         className="text-white"
@@ -610,7 +624,7 @@ export default function Navigation() {
                 {/* Cart */}
                 <div className="ml-4 flow-root lg:ml-6">
                   <Button
-                    // onClick={() => navigate("/cart")}
+                    onClick={() => navigate("/cart")}
                     className="group -m-2 flex items-center p-2"
                   >
                     <ShoppingBagIcon

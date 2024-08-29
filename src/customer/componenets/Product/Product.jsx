@@ -20,7 +20,7 @@ import mens_kurta from '../../../Data/Men/men_kurta'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { Pagination, colors } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
-import { findProducts } from '../../../store/product/Action'
+import { findProducts, getProducts } from '../../../store/product/Action'
 
 
 
@@ -44,8 +44,8 @@ const filters = [
     name: 'Color',
     options: [
       { value: 'white', label: 'White', checked: false },
-      { value: 'beige', label: 'Beige', checked: false },
-      { value: 'blue', label: 'Blue', checked: true },
+      { value: 'black', label: 'Black', checked: false },
+      { value: 'blue', label: 'Blue', checked: false },
       { value: 'brown', label: 'Brown', checked: false },
       { value: 'green', label: 'Green', checked: false },
       { value: 'purple', label: 'Purple', checked: false },
@@ -55,27 +55,24 @@ const filters = [
     id: 'size',
     name: 'Size',
     options: [
-      { value: '2l', label: '2L'},
-      { value: '6l', label: '6L'},
-      { value: '12l', label: '12L'},
-      { value: '18l', label: '18L'},
-      { value: '20l', label: '20L'},
-      { value: '40l', label: '40L'},
+      { value: 'L', label: 'L'},
+      { value: 'M', label: 'M'},
+      { value: 'S', label: 'S'},
     ],
   },
   {
     id: 'price',
     name: 'Price',
     options: [
-      { value: '159-399', label: '159$-399$'},
-      { value: '399-999', label: '399$-999$'},
-      { value: '999-1999', label: '999$-1999$'},
-      { value: '1999-2999', label: '1999$-2999$'},
-      { value: '2999-3999', label: '2999$-3999$'},
+      { value: '159-299', label: ' ₹159- ₹299'},
+      { value: '300-499', label: ' ₹300- ₹499'},
+      { value: '500-899', label: ' ₹500- ₹899'},
+      { value: '1000-1499', label: ' ₹1000- ₹1499'},
+      { value: '1499-2999', label: ' ₹1499- ₹2999'},
     ],
   },
   {
-    id: 'discountedprice',
+    id: 'discountedPercent',
     name: 'Discounted price',
     options: [
       { value: '10', label: '10% or above'},
@@ -92,8 +89,8 @@ const filters = [
     id: 'availability',
     name: 'Availability',
     options: [
-      { value: 'In stock', label: 'In stock' },
-      { value: 'Out of stock', label: 'Out of stock' },
+      { value: 'In_stock', label: 'In stock' },
+      { value: 'Out_of_stock', label: 'Out of stock' },
     ],
   },
 ]
@@ -102,87 +99,101 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
+
+
 export default function Product() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const params = useParams();
+  const { levelThree, levelTwo, levelOne } = useParams();
+  
   const dispatch = useDispatch();
-  const CustomerProductReducer = useSelector(state=>state.CustomerProductReducer);
-  console.log(CustomerProductReducer,"product reducer");
   
-  const HandlePaginationChange = (value) =>{
-    const searchParams = new URLSearchParams(location.search);
-    searchParams.set("page",value);
-    const query = searchParams.toString();
-    navigate({search:`${query}`})
-  }
-
-  const handleFilter = (sectionId, value) => {
-    const searchParams = new URLSearchParams(location.search);
-    let filtervalue = searchParams.getAll(sectionId);
-    if (filtervalue.length > 0 && filtervalue[0].split(',').includes(value)) {
-      // Remove the value if it exists
-      filtervalue = filtervalue[0].split(',').filter((item) => item !== value);
-    } else {
-      // Add the value if it doesn't exist
-      if (filtervalue.length > 0) {
-        filtervalue = filtervalue[0].split(',');
-      }
-      filtervalue.push(value);
-    }
-  
-    // Update the searchParams based on filtervalue
-    if (filtervalue.length === 0) {
-      searchParams.delete(sectionId);
-    } else {
-      searchParams.set(sectionId, filtervalue.join(','));
-    }
-  
-    const query = searchParams.toString();
-    navigate({ search: `?${query}` });
-
-
-  };
-  
+  // Extract query parameters from the URL
   const decodedQueryString = decodeURIComponent(location.search);
   const searchParams = new URLSearchParams(decodedQueryString);
 
   const colorValue = searchParams.get("color");
-  const stockValue = searchParams.get("stock");
   const priceValue = searchParams.get("price");
-  const categoryValue = searchParams.get("category");
-  const sizesValue = searchParams.get("sizes");
+  const sizeValue = searchParams.get("size");
   const discountedPercentValue = searchParams.get("discountedPercent");
   const sortValue = searchParams.get("sort");
-  const pageNumberValue = searchParams.get("pageNumber");
 
-  useEffect(()=>{
-const[minPrice,maxPrice] = priceValue === null ? [0,0]:priceValue.split("-").map(Number);
+  // Handle pagination change
+  const handlePaginationChange = (value) => {
+    searchParams.set("page", value);
+    const query = searchParams.toString();
+    navigate({ search: `?${query}` });
+  };
 
-const data = {
-  category:params.levelthree,
-  color:colorValue || [],
-  sizes:sizesValue || [],
-  stock:stockValue,
-  sort:sortValue || 'price_low',
-  minPrice,
-  maxPrice,
-  discountedPercent:discountedPercentValue || 0,
-  pageNumber:pageNumberValue-1,
-  pageSize:10,
-  stock:stockValue
-}
-dispatch(findProducts(data))
-  },[params.levelthree,
+  // Handle filter changes
+  const handleFilter = (sectionId, value) => {
+    let filterValue = searchParams.getAll(sectionId);
+    if (filterValue.length > 0 && filterValue[0].split(',').includes(value)) {
+      filterValue = filterValue[0].split(',').filter((item) => item !== value);
+    } else {
+      if (filterValue.length > 0) {
+        filterValue = filterValue[0].split(',');
+      }
+      filterValue.push(value);
+    }
+
+    if (filterValue.length === 0) {
+      searchParams.delete(sectionId);
+    } else {
+      searchParams.set(sectionId, filterValue.join(','));
+    }
+    const query = searchParams.toString();
+    navigate({ search: `?${query}` });
+  };
+
+  // Fetch products when the component mounts or dependencies change
+  useEffect(() => {
+    const [minPrice, maxPrice] = priceValue ? priceValue.split("-").map(Number) : [0, 10000];
+    
+    const data = {
+      color: colorValue || "",
+      size: sizeValue || "M",
+      sort: sortValue || "",
+      minPrice,
+      maxPrice,
+      discountedPercent: discountedPercentValue || "",
+    };
+
+    // Dispatch the action to fetch products based on filters
+    dispatch(findProducts(data));
+  }, [
+    levelThree,
+    levelTwo,
+    levelOne,
     colorValue,
     sortValue,
-    stockValue,
-    categoryValue,
-    pageNumberValue,
-    sizesValue
-  ])
+    priceValue,
+    discountedPercentValue,
+    dispatch
+  ]);
 
+  // Get the products from the Redux store
+  const productsReducer = useSelector(state => state?.CustomerProductReducer);
+  const productsAll = productsReducer?.allProducts?.content;
+
+  // Filter the products based on category levels
+  const filteredProducts = productsAll?.filter(product =>
+    product?.category?.name === levelThree && product?.category?.level === 3
+  );
+
+  // Optionally, you can also filter for Level Two and Level One if needed
+  // const filteredProductsLevelTwo = filteredProducts.filter(product =>
+  //   product?.category?.parentCategory?.name === levelTwo &&
+  //   product?.category?.parentCategory?.level === 2
+  // );
+
+  // const filteredProductsLevelOne = filteredProductsLevelTwo.filter(product =>
+  //   product?.category?.parentCategory?.parentCategory?.name === levelOne &&
+  //   product?.category?.parentCategory?.parentCategory?.level === 1
+  // );
+
+  // console.log('Filtered Products at Level Three:', filteredProducts);
   return (
     <div className="bg-white">
       <div>
@@ -235,7 +246,7 @@ dispatch(findProducts(data))
                       ))}
                     </ul>
 
-                    {filters.map((section) => (
+                    {filters?.map((section) => (
                       <Disclosure as="div" key={section.id} className="border-t border-gray-200 px-4 py-6">
                         {({ open }) => (
                           <>
@@ -410,13 +421,13 @@ dispatch(findProducts(data))
 
               {/* Product grid */}
               <div className="lg:col-span-3 flex flex-wrap justify-center items-center gap-12">
-                {CustomerProductReducer.allProducts.content && CustomerProductReducer.allProducts.content.map((item)=><ProductCard product={item}/>) }</div>
+                {filteredProducts && filteredProducts?.map((item)=><ProductCard product={item}/>) }</div>
             </div> 
           </section>
 
           <section className='w-full px-[3.5rem]'>
             <div className='px-4 py-4 flex justify-center'>
-           <Pagination count={CustomerProductReducer.allProducts.totalPages} color='secondary' onClick={HandlePaginationChange}></Pagination>
+           {/* <Pagination count={CustomerProductReducer.allProducts.totalPages} color='secondary' onClick={HandlePaginationChange}></Pagination> */}
             </div>
           </section>
         </main>

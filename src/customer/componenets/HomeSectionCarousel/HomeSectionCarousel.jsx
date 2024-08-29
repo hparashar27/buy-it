@@ -16,7 +16,7 @@ const HomeSectionCarousel = ({data=[]}) => {
      
        return (
         <div className='flex flex-col'>
-        <span className='text-center m-10 text-lg'> Men's Wear</span>
+        <span className='text-center m-10 text-lg'>{data[0]?.category?.name}</span>
         <div className='relative px-4 lg:px-8'>
         <div className='flex flex-row justify-center items-center'>
         <AliceCarousel

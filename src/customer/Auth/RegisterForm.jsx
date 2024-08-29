@@ -31,15 +31,15 @@ const RegisterForm = () => {
     e.preventDefault();
     dispatch(register(userData))
   };
-console.log("auth state from the store",);
+// console.log("auth state from the store",);
 
 useEffect(()=>{
-  console.log("dispatcher for the cart :--------")
+  // console.log("dispatcher for the cart :--------")
   ;
-  console.log("creating cart for the user------")
+  // console.log("creating cart for the user------")
 },[AuthReducer?.user?._id])
 
-console.log(allReducer,"all reducer")
+// console.log(allReducer,"all reducer")
   return (
     <Container maxWidth="xs">
       <Typography variant="h4" align="center" gutterBottom>
